@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Conexão para Todos</title>
+  <meta name="description" content="Jogo em pixel art sobre inclusão digital, acessibilidade e cidadania. Equipe 1 — UFC Russas.">
+  <link rel="stylesheet" href="fonts.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- TELA DE TÍTULO -->
+  <section id="screen-title" class="screen" aria-labelledby="game-title">
+    <canvas id="title-canvas" aria-hidden="true"></canvas>
+    <div class="title-box">
+      <img id="logo-icon" class="logo-icon pix" alt="" aria-hidden="true">
+      <p class="kicker">Jogo educativo em pixel art</p>
+      <h1 id="game-title" aria-label="Conexão para Todos"><span class="t1" aria-hidden="true">Conexão</span><span class="t2" aria-hidden="true">para Todos</span></h1>
+      <p class="tagline">Ajude a cidade de Conecta a incluir todo mundo no mundo digital.</p>
+      <nav class="menu" aria-label="Menu principal">
+        <button class="btn primary big" id="btn-play">Jogar · 1 jogador</button>
+        <button class="btn primary big" id="btn-play2">Jogar · 2 jogadores</button>
+        <div class="menu-grid">
+          <button class="btn small" id="btn-how">Como jogar</button>
+          <button class="btn small" id="btn-credits">Créditos</button>
+          <button class="btn small" id="btn-options">Opções</button>
+          <button class="btn small" id="btn-pad">🎮 Controle</button>
+        </div>
+      </nav>
+      <p id="pad-hint" class="coophint hidden">🎮 <b>Controle detectado:</b> use o direcional ou o analógico e aperte <b>A</b> para escolher.</p>
+      <p id="pad-help" class="coophint">🎮 <b>Tem controle?</b> Clique nesta janela e aperte um botão dele. Se não funcionar, abra <b>🎮 Controle</b>.</p>
+      <p class="coophint"><b>2 jogadores (co-op local):</b> <b>J1</b> usa <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> e <b>J2</b> usa as setas, no mesmo teclado.</p>
+      <p class="foot">Equipe 1 · UFC Campus de Russas</p>
+    </div>
+  </section>
+
+  <!-- TELA DO JOGO -->
+  <section id="screen-game" class="screen hidden" aria-label="Jogo">
+    <header id="hud">
+      <div class="hud-left">
+        <span class="brand">Conecta</span>
+        <button class="pill" id="btn-points" title="Pontos de Comunidade (clique para ver os status)">
+          <img id="ico-pt" class="pix ico" alt=""><span class="sr">Pontos de Comunidade:</span><b id="val-pt">0</b><span class="pill-label">pontos</span>
+        </button>
+        <span class="pill static" title="Missões concluídas"><span class="pill-label">Missões</span><b id="val-prog">0/10</b></span>
+      </div>
+      <div class="statbar" id="stats" role="group" aria-label="Status coletivos da cidade"></div>
+      <div class="hud-right">
+        <button class="btn small" id="btn-quests" title="Lista de missões (M)">Missões</button>
+        <button class="btn small" id="btn-pause" title="Pausar (Esc)">Pausa</button>
+      </div>
+    </header>
+
+    <main id="stage">
+      <canvas id="world" role="img" aria-label="Mapa de Conecta visto de cima. Use as setas ou WASD para andar e a tecla E para interagir."></canvas>
+      <button id="tracker" class="panel" title="Abrir lista de missões">
+        <span class="kicker">Objetivo atual</span>
+        <b id="tracker-title">—</b>
+        <span id="tracker-text">—</span>
+      </button>
+      <canvas id="minimap" aria-hidden="true"></canvas>
+      <div id="team" role="group" aria-label="Equipe de agentes (troque com Tab ou teclas 1, 2 e 3)"></div>
+      <div id="prompts"><button id="prompt" class="hidden"></button><button id="prompt2" class="hidden"></button></div>
+      <div id="touch" aria-label="Controles na tela">
+        <div class="dpad">
+          <button data-dir="up" aria-label="Andar para cima">▲</button>
+          <button data-dir="left" aria-label="Andar para a esquerda">◀</button>
+          <button data-dir="right" aria-label="Andar para a direita">▶</button>
+          <button data-dir="down" aria-label="Andar para baixo">▼</button>
+        </div>
+        <button id="btn-act" class="act" aria-label="Interagir">Interagir</button>
+      </div>
+      <div id="toasts" aria-live="polite" aria-atomic="false"></div>
+      <div id="dialogue" class="hidden" role="dialog" aria-label="Diálogo">
+        <button id="dlg-exit" class="btn small ghost dlg-exit" aria-label="Sair da conversa (tecla Esc)">✕ Sair <kbd>Esc</kbd></button>
+        <img id="dlg-portrait" class="pix portrait" alt="">
+        <div class="dlg-body">
+          <div id="dlg-name" class="dlg-name"></div>
+          <p id="dlg-text"></p>
+          <div id="dlg-extra"></div>
+          <div id="dlg-actions" class="dlg-actions"></div>
+        </div>
+      </div>
+    </main>
+  </section>
+
+  <div id="modal-root"></div>
+</div>
+
+<noscript><p style="padding:24px;background:#fff7e6">Este jogo precisa de JavaScript para funcionar.</p></noscript>
+
+<script src="js/sprites.js"></script>
+<script src="js/world.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/player.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/dialogue.js"></script>
+<script src="js/activities.js"></script>
+<script src="js/missions.js"></script>
+<script src="js/gamepad.js"></script>
+<script src="js/game.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

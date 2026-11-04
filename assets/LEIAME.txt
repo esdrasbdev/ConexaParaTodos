@@ -1,0 +1,3 @@
+Esta pasta existe para organização do projeto.
+Todos os gráficos (pixel art) e sons do jogo são gerados por código em tempo de execução
+(js/sprites.js e js/audio.js). Nenhum arquivo externo, imagem de terceiros ou serviço online é usado.

@@ -1,0 +1,5 @@
+Fontes pixel usadas no jogo (licença SIL Open Font License 1.1, uso livre, inclusive comercial):
+  - Press Start 2P (logotipo da tela inicial) - copyright 2012 The Press Start 2P Project Authors
+  - Pixelify Sans (títulos, botões e destaques) - copyright The Pixelify Sans Project Authors
+Os arquivos .woff2 daqui são embutidos em fonts.css (base64) para o jogo funcionar offline, mesmo abrindo index.html direto.
+Para regenerar o fonts.css depois de trocar uma fonte:  node tools/embed-fonts.js
