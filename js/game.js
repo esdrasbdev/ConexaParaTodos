@@ -45,9 +45,11 @@
     showScreen: function (id) {
       ['screen-title', 'screen-game'].forEach(function (s) { $('#' + s).classList.toggle('hidden', s !== id); });
       Game.mode = id === 'screen-game' ? 'play' : 'title';
+      if (CPT.Sound && CPT.Sound.setTrack) CPT.Sound.setTrack(id === 'screen-game' ? 'play' : 'title');
       window.dispatchEvent(new Event('resize'));
     },
     newGame: function (quiet) {
+      if (Game.coopMode && Game.isPhone()) Game.coopMode = false;   // celular: só 1 jogador
       Game.state = Game.freshState();
       Game.busy = 0; Game.paused = false;
       CPT.Player.reset(CPT.World.START.tx * T + 8, CPT.World.START.ty * T + 12, Game.coopMode);
@@ -62,9 +64,17 @@
       if (!quiet) Game.toast('<b>Nova partida!</b> Siga a seta amarela até o primeiro objetivo.', 5000);
     },
     /* Jogar: história + tutorial curto, depois a partida começa */
+    /* Celular = tela de toque (ponteiro "grosso") com o lado menor da janela pequeno. Tablets e computadores ficam de fora. */
+    forcePhone: null,   // só para testes: true/false força a resposta
+    isPhone: function () {
+      if (Game.forcePhone !== null) return !!Game.forcePhone;
+      const coarse = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
+      return coarse && Math.min(window.innerWidth, window.innerHeight) <= 500;
+    },
+    updatePhone: function () { document.body.classList.toggle('is-phone', Game.isPhone()); },   // esconde o 2 jogadores no celular
     startFlow: async function (coop) {
       CPT.Sound.init();
-      Game.coopMode = !!coop;
+      Game.coopMode = !!coop && !Game.isPhone();
       Game.newGame(true);
       Game.block(1);
       try {
@@ -357,6 +367,9 @@
         const off = function (e) { e.preventDefault(); if (v[0] && touch.x === v[0]) touch.x = 0; if (v[1] && touch.y === v[1]) touch.y = 0; b.classList.remove('on'); };
         b.addEventListener('pointerdown', on); b.addEventListener('pointerup', off); b.addEventListener('pointerleave', off); b.addEventListener('pointercancel', off);
       });
+      // Pressionar e segurar numa seta não pode selecionar texto nem abrir o menu do celular.
+      const noMenu = function (e) { const t = e.target; if (t && /^(INPUT|TEXTAREA)$/.test(t.tagName)) return; e.preventDefault(); };
+      ['contextmenu', 'selectstart', 'dragstart'].forEach(function (ev) { $('#screen-game').addEventListener(ev, noMenu); $('#screen-title').addEventListener(ev, noMenu); });
       $('#btn-act').addEventListener('click', function () { Game.interact(0); });
       $('#prompt').addEventListener('click', function () { this.blur(); Game.interact(0); });
       $('#prompt2').addEventListener('click', function () { this.blur(); Game.interact(1); });
@@ -433,7 +446,7 @@
             } else p.classList.add('hidden');
           }
         }
-        if (!hintShown && time > 6 && !Game.state.moved) { hintShown = true; Game.toast(coop ? 'Dica: <b>J1</b> anda com <b>W A S D</b> e <b>J2</b> com as <b>setas</b>. Sigam a seta amarela.' : 'Dica: use <b>W A S D</b> ou as <b>setas</b> para andar. Siga a seta amarela.', 6000); }
+        if (!hintShown && time > 6 && !Game.state.moved) { hintShown = true; Game.toast(coop ? 'Dica: <b>J1</b> anda com <b>W A S D</b> e <b>J2</b> com as <b>setas</b>. Sigam a seta amarela.' : (Game.isPhone() ? 'Dica: use as <b>setas na tela</b> para andar e o botão <b>Interagir</b>. Siga a seta amarela.' : 'Dica: use <b>W A S D</b> ou as <b>setas</b> para andar. Siga a seta amarela.'), 6000); }
       } else {
         for (let n = 0; n < 2; n++) if (promptKeys[n]) { promptKeys[n] = ''; prompts[n].classList.add('hidden'); targets[n] = null; }
       }

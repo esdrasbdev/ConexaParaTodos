@@ -17,7 +17,7 @@ e transforme a tecnologia em oportunidade para todo mundo — **sozinho ou em du
   <img alt="Dependências" src="https://img.shields.io/badge/depend%C3%AAncias-zero-5fc878?style=flat-square">
   <img alt="Pixel art" src="https://img.shields.io/badge/arte-gerada%20por%20c%C3%B3digo-a58be0?style=flat-square">
   <img alt="Idioma" src="https://img.shields.io/badge/idioma-pt--BR-ffd35c?style=flat-square&labelColor=444">
-  <img alt="Testes" src="https://img.shields.io/badge/testes-57%20de%20l%C3%B3gica%20%2B%20e2e-2f9a5d?style=flat-square">
+  <img alt="Testes" src="https://img.shields.io/badge/testes-68%20de%20l%C3%B3gica%20%2B%20e2e-2f9a5d?style=flat-square">
 </p>
 
 **[▶️ Como jogar](#-como-executar) · [🎮 Controles](#-controles) · [📋 Missões](#-as-10-missões) · [📜 Roteiro completo](docs/ROTEIRO.md) · [🧪 Testes](#-testes)**
@@ -56,14 +56,14 @@ Você lidera três **Agentes de Inclusão Digital** que conversam com os morador
 | | |
 |---|---|
 | 🏙️ **Exploração 2D em pixel art** | Cidade com 9 locais para **descobrir**, placas de curiosidade, minimapa e seta de objetivo |
-| 👥 **Co-op local para 2 jogadores** | **J1 com `WASD`** e **J2 com as setas**, cada um com seu agente, no mesmo teclado |
+| 👥 **Co-op local para 2 jogadores** | **J1 com `WASD`** e **J2 com as setas**, cada um com seu agente, no mesmo teclado (ou com 2 controles). No **celular** o jogo é só de **1 jogador** |
 | 🧭 **Equipe de 3 agentes (marcadores)** | **Márcio ●**, **Miguel ■** e **Yuri ▲**, cada um com uma especialidade |
 | 📊 **Status com efeitos reais** | O que você decide muda a cidade: Wi-Fi que acende, rampas que surgem, dicas que liberam |
 | 🧩 **10 missões variadas** | Escolhas com consequência, achar barreiras e golpes, relacionar pessoas e recursos, planejar uma oficina, coletar itens e uma missão **cooperativa** |
 | 🔁 **Sem “game over”** | Escolheu mal? O jogo explica o porquê e você tenta de novo — **errar ensina** |
 | 🎮 **Teclado, toque ou controle** | Jogue com teclado, na tela do celular ou com **gamepad** (Xbox, PlayStation, Switch Pro), inclusive em dupla |
 | ♿ **Acessível por design** | Sem tempo limite, teclado/mouse/toque, alto contraste, texto maior, reduzir animações, nada só por cor |
-| 📦 **Zero dependências** | HTML + CSS + JS puro. **Arte e sons gerados por código**, sem imagens nem serviços externos |
+| 📦 **Zero dependências** | HTML + CSS + JS puro. **Arte, sons e música gerados por código**, sem imagens nem serviços externos |
 
 ## 📸 Capturas de tela
 
@@ -212,12 +212,13 @@ No **modo dupla**: com **2 controles**, o primeiro é do Jogador 1 e o segundo d
 - ⌨️ Teclado, mouse, toque **e controle (gamepad)**; botões na tela para quem não usa teclado
 - 🎨 Informação **nunca só por cor**: ícones, formas, rótulos e números
 - 🔠 Opções de **texto maior**, **alto contraste** e **reduzir animações** (respeita `prefers-reduced-motion`)
-- 🔇 Sons opcionais: o jogo funciona totalmente no mudo
+- 🎵 Música de fundo (uma trilha calma no título e outra animada na cidade) com caixa própria em **Opções**; 🔇 sons opcionais: o jogo funciona totalmente no mudo
+- 📱 No celular, segurar as setas não seleciona texto nem abre o menu do sistema
 - 🧠 Dicas opcionais, sem punição por errar
 
 ## 🛠️ Tecnologias
 
-- **HTML5 Canvas 2D** para o mundo em pixel art e **Web Audio API** para os sons
+- **HTML5 Canvas 2D** para o mundo em pixel art e **Web Audio API** para sons e música
 - **CSS3** responsivo (desktop e celular), sem frameworks
 - **JavaScript puro**, sem bibliotecas e sem etapa de build
 - Toda a arte (tiles, prédios, personagens, retratos, marcadores) e todos os sons são **gerados por código**
@@ -239,7 +240,7 @@ conexao-para-todos/
 │   ├── game.js             # estado, laço principal, câmera, desenho, entrada, status, vitória
 │   ├── ui.js               # HUD, pausa, opções, tutorial, créditos, tela de título
 │   ├── gamepad.js          # suporte a controles (Gamepad API)
-│   ├── audio.js            # sons com Web Audio
+│   ├── audio.js            # sons e música de fundo com Web Audio
 │   └── main.js             # inicialização
 ├── docs/
 │   ├── ROTEIRO.md          # roteiro completo do jogo
@@ -256,7 +257,7 @@ conexao-para-todos/
 
 ## 🧪 Testes
 
-**Testes de lógica (sem instalar nada):** abra `tests/test.html` no navegador. São **57 verificações**: mapa alcançável, colisões, status e efeitos reais, validade das missões, equilíbrio, portal, vitória, **sair de conversas e atividades** (sem travar e sem repetir ganhos) e o **modo co-op** (movimento independente, troca de agentes, elástico, alvos por jogador).
+**Testes de lógica (sem instalar nada):** abra `tests/test.html` no navegador. São **68 verificações**: mapa alcançável, colisões, status e efeitos reais, validade das missões, equilíbrio, portal, vitória, **sair de conversas e atividades** (sem travar e sem repetir ganhos) e o **modo co-op** (movimento independente, troca de agentes, elástico, alvos por jogador).
 
 **Partida completa automática (opcional, Node 18+):**
 

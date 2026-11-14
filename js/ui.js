@@ -64,7 +64,7 @@
   }, true);
 
   /* ---------- Configurações ---------- */
-  const defaults = { volume: 50, muted: false, reduceMotion: false, largeText: false, contrast: false, touch: false, gamepad: true };
+  const defaults = { volume: 50, muted: false, music: true, reduceMotion: false, largeText: false, contrast: false, touch: false, gamepad: true };
   const Settings = (CPT.Settings = {
     v: Object.assign({}, defaults),
     load: function () {
@@ -80,7 +80,8 @@
       b.classList.toggle('large-text', !!v.largeText);
       b.classList.toggle('high-contrast', !!v.contrast);
       b.classList.toggle('show-touch', !!v.touch);
-      CPT.Sound.volume = v.volume / 100; CPT.Sound.muted = !!v.muted;
+      CPT.Sound.volume = v.volume / 100; CPT.Sound.muted = !!v.muted; CPT.Sound.musicOn = v.music !== false;
+      if (CPT.Sound.music) CPT.Sound.music.sync();
       if (CPT.Gamepad) CPT.Gamepad.enabled = v.gamepad !== false;
     },
     open: function () {
@@ -88,7 +89,8 @@
       const h = Modal.open(
         '<h2>Opções</h2><div class="opts">' +
         '<label class="opt"><span>Volume dos sons</span><input id="o-vol" type="range" min="0" max="100" value="' + v.volume + '" aria-label="Volume"></label>' +
-        '<label class="opt check"><input id="o-mute" type="checkbox"' + (v.muted ? ' checked' : '') + '><span>Silenciar sons (o jogo funciona sem som)</span></label>' +
+        '<label class="opt check"><input id="o-music" type="checkbox"' + (v.music !== false ? ' checked' : '') + '><span>Música de fundo</span></label>' +
+        '<label class="opt check"><input id="o-mute" type="checkbox"' + (v.muted ? ' checked' : '') + '><span>Silenciar tudo (o jogo funciona sem som)</span></label>' +
         '<label class="opt check"><input id="o-motion" type="checkbox"' + (v.reduceMotion ? ' checked' : '') + '><span>Reduzir animações e efeitos</span></label>' +
         '<label class="opt check"><input id="o-large" type="checkbox"' + (v.largeText ? ' checked' : '') + '><span>Texto maior</span></label>' +
         '<label class="opt check"><input id="o-contrast" type="checkbox"' + (v.contrast ? ' checked' : '') + '><span>Alto contraste na interface</span></label>' +
@@ -97,7 +99,7 @@
         '</div><div class="actions"><button class="btn primary" id="o-ok">Pronto</button></div>',
         { label: 'Opções', onEsc: function () { h.close(); } });
       function upd() {
-        v.volume = +$('#o-vol', h.card).value; v.muted = $('#o-mute', h.card).checked;
+        v.volume = +$('#o-vol', h.card).value; v.muted = $('#o-mute', h.card).checked; v.music = $('#o-music', h.card).checked;
         v.reduceMotion = $('#o-motion', h.card).checked; v.reduceMotionSet = true;
         v.largeText = $('#o-large', h.card).checked; v.contrast = $('#o-contrast', h.card).checked;
         v.touch = $('#o-touch', h.card).checked; v.touchSet = true; v.gamepad = $('#o-pad', h.card).checked;

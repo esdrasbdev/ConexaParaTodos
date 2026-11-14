@@ -567,6 +567,132 @@
       h.close(); GPd.swap = false; try { localStorage.removeItem('cpt-padswap'); } catch (e) { /* ok */ } padDone();
     });
 
+    /* ---------- celular: sem toque selecionando texto e só 1 jogador ---------- */
+    test('celular: pressionar e segurar nas setas não seleciona texto (CSS + eventos)', function () {
+      const btn = document.querySelector('.dpad button'), cs = getComputedStyle(btn);
+      eq(cs.userSelect || cs.webkitUserSelect, 'none', 'as setas não podem permitir seleção de texto');
+      eq(cs.touchAction, 'none', 'as setas não podem rolar nem dar zoom');
+      eq(getComputedStyle(document.querySelector('#btn-act')).userSelect, 'none');
+      eq(getComputedStyle(document.querySelector('#screen-game')).userSelect, 'none');
+      const ev = new Event('contextmenu', { bubbles: true, cancelable: true }); btn.dispatchEvent(ev);
+      ok(ev.defaultPrevented, 'o menu de pressionar e segurar deveria ser bloqueado');
+      const ev2 = new Event('selectstart', { bubbles: true, cancelable: true }); btn.dispatchEvent(ev2);
+      ok(ev2.defaultPrevented, 'iniciar seleção deveria ser bloqueado');
+    });
+    test('celular: o modo de 2 jogadores não existe (botão e dicas somem; o jogo fica solo)', function () {
+      G.forcePhone = true; G.updatePhone();
+      ok(document.body.classList.contains('is-phone'));
+      eq(getComputedStyle(document.querySelector('#btn-play2')).display, 'none', 'botão de 2 jogadores deveria sumir');
+      eq(getComputedStyle(document.querySelector('.coop-only')).display, 'none', 'dica de 2 jogadores deveria sumir');
+      ok(getComputedStyle(document.querySelector('#btn-play')).display !== 'none', 'o de 1 jogador continua');
+      G.coopMode = true; G.newGame(true);
+      eq(P.coop, false, 'no celular o co-op deveria ser recusado'); eq(G.coopMode, false);
+      const p = G.startFlow(true); eq(G.coopMode, false, 'startFlow(true) no celular vira 1 jogador'); eq(P.coop, false);
+      cleanupUI();
+      G.forcePhone = false; G.updatePhone();
+      ok(!document.body.classList.contains('is-phone'), 'fora do celular o botão volta');
+      ok(getComputedStyle(document.querySelector('#btn-play2')).display !== 'none');
+      startCoop(); eq(P.coop, true, 'no computador o co-op continua funcionando'); endCoop();
+      G.forcePhone = null; G.updatePhone();
+    });
+
+    /* ---------- dois controles (testados com controles simulados) ---------- */
+    test('2 controles: cada um anda com o seu jogador, sem interferir no outro', function () {
+      startCoop(); GPd.reset(); padList.length = 0;
+      const a = mkPad(0), b = mkPad(1); padList.push(a, b);
+      const j1 = P.leaderOf(0), j2 = P.leaderOf(1), x1 = j1.x, y1 = j1.y, x2 = j2.x, y2 = j2.y;
+      a.axes[0] = 1; b.axes[1] = 1;                                   // controle 1 → direita, controle 2 → baixo
+      for (let i = 0; i < 6; i++) { GPd.poll(); G.update(0.05); }
+      ok(j1.x > x1 + 5, 'J1 (controle 1) deveria andar para a direita'); ok(Math.abs(j1.y - y1) < 0.5, 'J1 não pode andar na vertical');
+      ok(j2.y > y2 + 5, 'J2 (controle 2) deveria andar para baixo'); ok(Math.abs(j2.x - x2) < 0.5, 'J2 não pode andar na horizontal');
+      a.axes[0] = 0; b.axes[1] = 0; GPd.poll(); G.update(0.05); padDone(); endCoop();
+    });
+    test('2 controles: o botão A de cada um interage como o seu próprio jogador', function () {
+      startCoop(); GPd.reset(); padList.length = 0;
+      const a = mkPad(0), b = mkPad(1); padList.push(a, b);
+      const calls = [], orig = G.interact; G.interact = function (n) { calls.push(n); };
+      try { tap(a, 0); tap(b, 0); tap(b, 0); tap(a, 0); } finally { G.interact = orig; }
+      eq(calls.join(','), '0,1,1,0', 'A do controle 1 = J1, A do controle 2 = J2');
+      padDone(); endCoop();
+    });
+    test('2 controles: funciona com lacunas na lista do navegador e ignora sensores fantasmas', function () {
+      startCoop(); GPd.reset(); padList.length = 0;
+      const ghost = mkPad(0); ghost.id = 'Wireless Controller Motion Sensors'; ghost.axes = [1, 1, 1, 1];
+      const a = mkPad(1), b = mkPad(3);                               // o navegador entrega [fantasma, controle, vazio, controle]
+      padList.push(ghost, a, null, b);
+      a.axes[0] = 1; b.axes[1] = -1; GPd.poll();
+      eq(GPd.count, 2, 'deveria contar só os 2 controles de verdade');
+      eq(GPd.dirs[0].x, 1, 'primeiro controle de verdade = J1'); eq(GPd.dirs[0].y, 0);
+      eq(GPd.dirs[1].y, -1, 'segundo controle de verdade = J2'); eq(GPd.dirs[1].x, 0);
+      padDone(); endCoop();
+    });
+    test('2 controles: o botão Y de cada um troca o agente só do seu jogador', function () {
+      startCoop(); GPd.reset(); padList.length = 0;
+      const a = mkPad(0), b = mkPad(1); padList.push(a, b);
+      const o0 = P.order.slice();
+      tap(b, 3);                                                      // Y do controle 2 (J2)
+      eq(P.order[0], o0[0], 'o J1 não pode mudar de agente quando o J2 aperta Y');
+      ok(P.order[1] !== o0[1], 'o J2 deveria ter trocado de agente');
+      padDone(); endCoop();
+    });
+    test('2 controles no celular (1 jogador): os dois controles comandam o mesmo jogador', function () {
+      G.forcePhone = true; G.coopMode = true; G.newGame(true); GPd.reset(); padList.length = 0;
+      const a = mkPad(0), b = mkPad(1); padList.push(a, b);
+      b.axes[0] = -1; GPd.poll(); eq(GPd.dirs[0].x, -1, 'qualquer controle comanda o único jogador'); eq(GPd.dirs[1].x, 0, 'não existe J2 no celular');
+      padDone(); G.forcePhone = null; G.updatePhone(); G.newGame(true);
+    });
+
+    /* ---------- música de fundo ---------- */
+    const mockCtx = function () {
+      const param = function () { return { value: 0, setValueAtTime: function () {}, linearRampToValueAtTime: function () {}, exponentialRampToValueAtTime: function () {}, setTargetAtTime: function () {}, cancelScheduledValues: function () {} }; };
+      const node = function () { return { connect: function () {}, disconnect: function () {}, start: function () { this.started = true; }, stop: function () {}, gain: param(), frequency: param(), detune: param(), delayTime: param(), buffer: null, type: '' }; };
+      const c = { currentTime: 0, state: 'running', sampleRate: 22050, destination: node(), made: 0, resume: function () {}, suspend: function () {},
+        createBuffer: function (n, len) { return { getChannelData: function () { return new Float32Array(len); } }; } };
+      ['createGain', 'createOscillator', 'createBiquadFilter', 'createDelay', 'createDynamicsCompressor', 'createBufferSource'].forEach(function (k) { c[k] = function () { c.made++; return node(); }; });
+      return c;
+    };
+    test('música: as trilhas existem, os compassos fecham e todas as notas são audíveis', function () {
+      const TR = CPT.Sound.music.TRACKS;
+      ['play', 'title'].forEach(function (k) {
+        const t = TR[k]; eq(t.chords.length, t.roots.length, k + ': um baixo por acorde'); eq(t.chords.length, t.melody.length, k + ': uma melodia por compasso');
+        t.melody.forEach(function (bar) { bar.forEach(function (n) { ok(n[0] >= 0 && n[0] + n[2] <= 16, k + ': nota passa do fim do compasso'); ok(n[1] >= 55 && n[1] <= 95, k + ': nota fora da região audível'); }); });
+      });
+    });
+    test('música: renderizada, não é silêncio, não estoura e tem som em todos os compassos', async function () {
+      for (const name of ['play', 'title']) {
+        const buf = await CPT.Sound.music.render(name, 4, 22050), d = buf.getChannelData(0);
+        let peak = 0, nan = 0; for (let i = 0; i < d.length; i++) { const a = Math.abs(d[i]); if (a !== a) nan++; if (a > peak) peak = a; }
+        eq(nan, 0, name + ': não pode ter valores inválidos'); ok(peak > 0.05, name + ': parece silêncio'); ok(peak < 0.95, name + ': estourou (distorção)');
+        const per = Math.floor(d.length / 4.1); for (let k = 0; k < 4; k++) { let s = 0; for (let i = k * per; i < (k + 1) * per; i++) s += d[i] * d[i]; ok(Math.sqrt(s / per) > 0.01, name + ': compasso ' + (k + 1) + ' sem som'); }
+      }
+    });
+    test('música: toca na tela certa, respeita Opções (música desligada, silenciar, volume 0) e para ao sair', function () {
+      const Snd = CPT.Sound, Mu = Snd.music, realCtx = Snd.ctx, S = CPT.Settings;
+      const saved = { musicOn: Snd.musicOn, muted: Snd.muted, volume: Snd.volume }, c = mockCtx();
+      try {
+        Snd.ctx = c; Mu.busCtx = null; Mu.cur = null;
+        G.showScreen('screen-title'); eq(Mu.want, 'title'); eq(Mu.cur, 'title', 'no título toca a trilha calma');
+        G.showScreen('screen-game'); eq(Mu.want, 'play'); eq(Mu.cur, 'play', 'no jogo toca a trilha animada');
+        c.currentTime = 1; const before = c.made; Mu.tick(); ok(c.made > before + 5, 'o agendador deveria criar as notas à frente');
+        S.v.music = false; S.apply(); eq(Mu.timer, null, 'com "Música de fundo" desmarcado o agendador para'); eq(Mu.cur, null);
+        S.v.music = true; S.apply(); eq(Mu.cur, 'play', 'ao marcar de novo, a música volta');
+        S.v.muted = true; S.apply(); eq(Mu.cur, null, 'silenciar tudo também cala a música');
+        S.v.muted = false; S.v.volume = 0; S.apply(); eq(Mu.cur, null, 'volume 0 = sem música');
+        S.v.volume = 50; S.apply(); eq(Mu.cur, 'play');
+        Mu.halt(); eq(Mu.timer, null);
+      } finally {
+        Mu.halt(); S.v.music = true; S.v.muted = false; S.v.volume = 50; Snd.ctx = realCtx; Mu.busCtx = null; Mu.cur = null;
+        Snd.musicOn = saved.musicOn; Snd.muted = saved.muted; Snd.volume = saved.volume; S.apply(); G.showScreen('screen-game');
+      }
+    });
+    test('música: a caixa "Música de fundo" aparece nas Opções e liga/desliga de verdade', function () {
+      const S = CPT.Settings, h = S.open(), cb = h.card.querySelector('#o-music');
+      ok(cb && cb.checked, 'a caixa deveria existir e vir marcada');
+      cb.checked = false; cb.dispatchEvent(new Event('change', { bubbles: true })); eq(CPT.Sound.musicOn, false);
+      cb.checked = true; cb.dispatchEvent(new Event('change', { bubbles: true })); eq(CPT.Sound.musicOn, true);
+      h.close(); try { localStorage.removeItem('cpt-settings'); } catch (e) { /* ok */ }
+    });
+
     return queue;
   }
 

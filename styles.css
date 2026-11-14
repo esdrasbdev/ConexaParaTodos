@@ -297,3 +297,13 @@ body.high-contrast .btn { border-width: 4px; } body.high-contrast .chip.up { bac
 body.high-contrast .overlay { background: rgba(0, 0, 0, .8); }
 body.reduce-motion * { animation: none !important; transition: none !important; }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+/* ---------- toque no celular: sem seleção de texto, sem menu de "pressionar e segurar", sem zoom ---------- */
+#screen-game, #screen-title, #touch, #touch * {
+  -webkit-user-select: none; user-select: none; -webkit-touch-callout: none;
+}
+#screen-game input, #screen-game textarea, #screen-title input, #screen-title textarea { -webkit-user-select: text; user-select: text; }
+#touch, #touch button, .dpad button, #touch .act { touch-action: none; -webkit-tap-highlight-color: transparent; }
+#world { touch-action: none; }
+/* no celular só existe o modo de 1 jogador */
+body.is-phone #btn-play2, body.is-phone .coop-only { display: none !important; }
