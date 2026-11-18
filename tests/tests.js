@@ -359,7 +359,9 @@
       const p = M.interactNpc('marta'); await tick();
       clickPrimary(); await tick(); clickPrimary(); await tick();
       const opts = document.querySelectorAll('#dlg-actions .choices .btn.choice'); eq(opts.length, 3, 'esperava 3 alternativas');
-      opts[2].click(); await tick();
+      const best = Array.from(opts).find(function (b) { return /Sentar ao lado/.test(b.textContent); });
+      ok(best, 'deveria encontrar a melhor resposta embaralhada');
+      best.click(); await tick();
       eq(G.state.stats.co, co0 + 8); eq(G.state.stats.ab, ab0 + 2);
       D.cancel(); await p;
       eq(G.busy, 0); eq(G.state.missions.saude.doneSteps[1], true, 'a etapa deveria estar concluída');
@@ -378,7 +380,10 @@
       const def = W.STATIONS.filter(function (x) { return x.id === 't3'; })[0], pts0 = G.state.pts, s0 = Object.assign({}, G.state.stats);
       const p = M.interactStation(def); await tick();
       ok(D.isOpen(), 'o posto deveria abrir a escolha');
-      document.querySelectorAll('#dlg-actions .choices .btn.choice')[2].click(); await tick();
+      const stationOpts = Array.from(document.querySelectorAll('#dlg-actions .choices .btn.choice'));
+      const stationBest = stationOpts.find(function (b) { return /Passo a passo curto/.test(b.textContent); });
+      ok(stationBest, 'deveria encontrar a melhor opção embaralhada do posto');
+      stationBest.click(); await tick();
       eq(m.prog.t3, true, 'o posto deveria contar como concluído ao escolher');
       D.cancel(); await p;
       eq(G.busy, 0);
@@ -442,7 +447,10 @@
       const pad = mkPad(0), co0 = G.state.stats.co; padList.push(pad);
       const p = M.interactNpc('marta'); await tick();
       tap(pad, 0); await tick(); tap(pad, 0); await tick();
-      tap(pad, 13); tap(pad, 13);                                   // 3ª resposta (a melhor)
+      const choices = Array.from(document.querySelectorAll('#dlg-actions .choices .btn.choice'));
+      const bestIndex = choices.findIndex(function (b) { return /Sentar ao lado/.test(b.textContent); });
+      ok(bestIndex >= 0, 'deveria encontrar a melhor resposta embaralhada');
+      for (let i = 0; i < bestIndex; i++) tap(pad, 13);
       tap(pad, 0); await tick();
       eq(G.state.stats.co, co0 + 8, 'a melhor resposta deveria dar +8 de Conhecimento');
       D.cancel(); await p; padDone(); cleanupUI();

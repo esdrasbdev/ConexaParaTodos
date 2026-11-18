@@ -4,7 +4,7 @@
  *  - Menus e conversas: direcional/analógico navega · A confirma · B (ou Start na pausa) sai/volta
  *  - Solo: qualquer controle conectado comanda o jogador. Co-op: com 2 controles, o 1º é do J1 e o 2º do J2; com 1, ele fica com o J2.
  * Robustez: ignora "controles fantasmas" (sensores de movimento), entende o direcional em eixo (hat) de controles genéricos
- * e oferece o painel "🎮 Controle" para ver o que o navegador detecta e configurar os botões. */
+ * e oferece o painel "Controle" para ver o que o navegador detecta e configurar os botões. */
 (function () {
   'use strict';
   const CPT = (window.CPT = window.CPT || {});
@@ -76,7 +76,7 @@
         hint.classList.toggle('hidden', !(pads.length > 0 && title));
         if (pads.length > 0 && title) {
           const odd = pads.some(function (g) { return g.mapping !== 'standard' && !GP.maps[g.id]; });
-          const html = '🎮 <b>Controle detectado:</b> use o direcional ou o analógico e aperte <b>A</b> para escolher.' + (odd ? ' <b>Se os botões não baterem, abra “🎮 Controle” para configurar.</b>' : '');
+          const html = '<b>Controle detectado:</b> use o direcional ou o analógico e aperte <b>A</b> para escolher.' + (odd ? ' <b>Se os botões não baterem, abra “Controle” para configurar.</b>' : '');
           if (hint.dataset.h !== html) { hint.innerHTML = html; hint.dataset.h = html; }
         }
       }
@@ -166,10 +166,10 @@
       if (b) b.click();
     },
 
-    /* ---------- painel "🎮 Controle": diagnóstico ao vivo + assistente de botões ---------- */
+    /* ---------- painel "Controle": diagnóstico ao vivo + assistente de botões ---------- */
     openPanel: function () {
       let timer = null;
-      const h = CPT.Modal.open('<h2>🎮 Controle</h2><p id="pad-status" class="lead"></p><div id="pad-live"></div><div id="pad-wiz" class="hidden" aria-live="polite"></div>' +
+      const h = CPT.Modal.open('<h2>Controle</h2><p id="pad-status" class="lead"></p><div id="pad-live"></div><div id="pad-wiz" class="hidden" aria-live="polite"></div>' +
         '<div class="actions"><button class="btn" id="pad-config">Configurar botões</button><button class="btn" id="pad-reset">Restaurar padrão</button><button class="btn" id="pad-swap"></button><button class="btn primary" id="pad-close">Fechar</button></div>',
         { label: 'Controle', cls: 'wide', onEsc: function () { h.close(); }, onClose: function () { clearInterval(timer); GP.capture = null; } });
       const $ = function (s) { return h.card.querySelector(s); };
@@ -260,10 +260,10 @@
   });
 
   window.addEventListener('gamepadconnected', function () {
-    if (CPT.Game && CPT.Game.mode === 'play' && CPT.UI) CPT.UI.toast('🎮 <b>Controle conectado.</b> Use o analógico ou o direcional e o botão A.', 4200);
+    if (CPT.Game && CPT.Game.mode === 'play' && CPT.UI) CPT.UI.toast('<b>Controle conectado.</b> Use o analógico ou o direcional e o botão A.', 4200);
   });
   window.addEventListener('gamepaddisconnected', function () {
-    if (CPT.Game && CPT.Game.mode === 'play' && CPT.UI) CPT.UI.toast('🎮 Controle desconectado. O teclado continua funcionando.', 3500);
+    if (CPT.Game && CPT.Game.mode === 'play' && CPT.UI) CPT.UI.toast('Controle desconectado. O teclado continua funcionando.', 3500);
   });
   ['mousedown', 'keydown'].forEach(function (t) { document.addEventListener(t, function () { document.body.classList.remove('padnav'); }, true); });
 })();

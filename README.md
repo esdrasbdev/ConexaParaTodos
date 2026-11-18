@@ -20,7 +20,7 @@ e transforme a tecnologia em oportunidade para todo mundo — **sozinho ou em du
   <img alt="Testes" src="https://img.shields.io/badge/testes-68%20de%20l%C3%B3gica%20%2B%20e2e-2f9a5d?style=flat-square">
 </p>
 
-**[▶️ Como jogar](#-como-executar) · [🎮 Controles](#-controles) · [📋 Missões](#-as-10-missões) · [📜 Roteiro completo](docs/ROTEIRO.md) · [🧪 Testes](#-testes)**
+**[Como jogar](#como-executar) · [Controles](#controles) · [Missões](#as-10-missões) · [Roteiro completo](docs/ROTEIRO.md) · [Testes](#testes)**
 
 <br>
 
@@ -47,23 +47,23 @@ Você lidera três **Agentes de Inclusão Digital** que conversam com os morador
 
 | Agente | Foco | Marcador | Posto no Portal Conecta+ |
 |---|---|---|---|
-| **Márcio** | ♿ Acessibilidade: leitores de tela, contraste e acesso para pessoas com deficiência | ● círculo · tecla `1` | Leitor de tela |
+| **Márcio** | Acessibilidade: leitores de tela, contraste e acesso para pessoas com deficiência | ● círculo · tecla `1` | Leitor de tela |
 | **Miguel** | 📶 Acesso: redes, aparelhos simples e conexão fraca | ■ quadrado · tecla `2` | Conexão lenta |
-| **Yuri** | 📖 Conhecimento: explicar passo a passo, com paciência e linguagem simples | ▲ triângulo · tecla `3` | Linguagem simples |
+| **Yuri** | Conhecimento: explicar passo a passo, com paciência e linguagem simples | ▲ triângulo · tecla `3` | Linguagem simples |
 
 ## 🌟 Destaques
 
 | | |
 |---|---|
-| 🏙️ **Exploração 2D em pixel art** | Cidade com 9 locais para **descobrir**, placas de curiosidade, minimapa e seta de objetivo |
-| 👥 **Co-op local para 2 jogadores** | **J1 com `WASD`** e **J2 com as setas**, cada um com seu agente, no mesmo teclado (ou com 2 controles). No **celular** o jogo é só de **1 jogador** |
-| 🧭 **Equipe de 3 agentes (marcadores)** | **Márcio ●**, **Miguel ■** e **Yuri ▲**, cada um com uma especialidade |
-| 📊 **Status com efeitos reais** | O que você decide muda a cidade: Wi-Fi que acende, rampas que surgem, dicas que liberam |
-| 🧩 **10 missões variadas** | Escolhas com consequência, achar barreiras e golpes, relacionar pessoas e recursos, planejar uma oficina, coletar itens e uma missão **cooperativa** |
-| 🔁 **Sem “game over”** | Escolheu mal? O jogo explica o porquê e você tenta de novo — **errar ensina** |
-| 🎮 **Teclado, toque ou controle** | Jogue com teclado, na tela do celular ou com **gamepad** (Xbox, PlayStation, Switch Pro), inclusive em dupla |
-| ♿ **Acessível por design** | Sem tempo limite, teclado/mouse/toque, alto contraste, texto maior, reduzir animações, nada só por cor |
-| 📦 **Zero dependências** | HTML + CSS + JS puro. **Arte, sons e música gerados por código**, sem imagens nem serviços externos |
+| **Exploração 2D em pixel art** | Cidade com 9 locais para **descobrir**, placas de curiosidade, minimapa e seta de objetivo |
+| **Co-op local para 2 jogadores** | **J1 com `WASD`** e **J2 com as setas**, cada um com seu agente, no mesmo teclado (ou com 2 controles). No **celular** o jogo é só de **1 jogador** |
+| **Equipe de 3 agentes (marcadores)** | **Márcio ●**, **Miguel ■** e **Yuri ▲**, cada um com uma especialidade |
+| **Status com efeitos reais** | O que você decide muda a cidade: Wi-Fi que acende, rampas que surgem, dicas que liberam |
+| **10 missões variadas** | Escolhas com consequência, achar barreiras e golpes, relacionar pessoas e recursos, planejar uma oficina, coletar itens e uma missão **cooperativa** |
+| **Sem “game over”** | Escolheu mal? O jogo explica o porquê e você tenta de novo — **errar ensina** |
+| **Teclado, toque ou controle** | Jogue com teclado, na tela do celular ou com **gamepad** (Xbox, PlayStation, Switch Pro), inclusive em dupla |
+| **Acessível por design** | Sem tempo limite, teclado/mouse/toque, alto contraste, texto maior, reduzir animações, nada só por cor |
+| **Zero dependências** | HTML + CSS + JS puro. **Arte, sons e música gerados por código**, sem imagens nem serviços externos |
 
 ## 📸 Capturas de tela
 
@@ -85,7 +85,7 @@ Você lidera três **Agentes de Inclusão Digital** que conversam com os morador
     <td align="center"><img src="docs/screenshots/11-casas.png" alt="Casa do Seu Zeca e Casa da Sofia, com os moradores e balões de missão"><br><sub><b>Novos locais</b>: casas de Seu Zeca e Sofia</sub></td>
   </tr>
   <tr>
-    <td align="center" colspan="2"><img src="docs/screenshots/12-controle.png" alt="Painel de diagnóstico do controle, mostrando botões e eixos ao vivo" width="640"><br><sub><b>Painel 🎮 Controle</b>: veja ao vivo o que o navegador detecta e configure os botões</sub></td>
+    <td align="center" colspan="2"><img src="docs/screenshots/12-controle.png" alt="Painel de diagnóstico do controle, mostrando botões e eixos ao vivo" width="640"><br><sub><b>Painel Controle</b>: veja ao vivo o que o navegador detecta e configure os botões</sub></td>
   </tr>
   <tr>
     <td align="center" colspan="2"><img src="docs/screenshots/09-vitoria.png" alt="Tela de vitória: Conecta agora é para todos" width="560"><br><sub><b>Vitória</b>: o que a cidade aprendeu</sub></td>
@@ -113,43 +113,45 @@ python3 -m http.server 8000     # abra http://localhost:8000
 
 **Opção 3 — publicar no GitHub Pages:** em **Settings → Pages**, escolha **Deploy from a branch → `main` / `(root)`**. O jogo ficará em `https://SEU-USUARIO.github.io/conexao-para-todos/`.
 
-## 🎮 Controles
+## Controles
 
-### 👥 Dois jogadores (mesmo teclado)
+### Dois jogadores (mesmo teclado)
 
-| Ação | 🟡 Jogador 1 | 🔵 Jogador 2 |
+| Ação | Jogador 1 | Jogador 2 |
 |---|---|---|
 | Andar | `W` `A` `S` `D` | `↑` `←` `↓` `→` |
 | Interagir | `E` ou `Espaço` | `Enter` |
 | Trocar de agente | `Q` (ou `1` `2` `3`) | `Shift` direito (ou `Num 1` `Num 2` `Num 3`) |
 
-> **Sair a qualquer momento:** em qualquer conversa ou atividade, `Esc` ou **✕ Sair** fecha a janela. A missão continua de onde parou, e o que já foi decidido fica salvo (não dá para repetir um ganho de status).
+> **Sair a qualquer momento:** em qualquer conversa ou atividade, `Esc` ou **Sair** fecha a janela. A missão continua de onde parou, e o que já foi decidido fica salvo (não dá para repetir um ganho de status).
 >
 > Nos retratos da equipe: **clique** = Jogador 1 · **Shift + clique** = Jogador 2. Se um pega o agente do outro, os dois **trocam de agente**.
 > A câmera acompanha a dupla e há um **“elástico”**: os dois não conseguem se afastar além da tela um do outro.
+>
+> As opções das perguntas aparecem em posições variadas, para que a melhor resposta não fique sempre na terceira alternativa.
 
-### 🎮 Com controle (gamepad)
+### Com controle (gamepad)
 
 Conecte um controle de **Xbox, PlayStation, Switch Pro** ou similar e aperte qualquer botão: o jogo reconhece sozinho (funciona em Chrome, Edge e Firefox). Dá para jogar **do menu inicial até a vitória sem teclado**.
 
 | Ação | Botão |
 |---|---|
 | Andar | analógico esquerdo ou direcional |
-| Interagir / confirmar | **A** (✕ no PlayStation) |
-| Sair ou voltar | **B** (○) |
+| Interagir / confirmar | **A** (X no PlayStation) |
+| Sair ou voltar | **B** (círculo no PlayStation) |
 | Trocar de agente | **Y** ou **RB** = próximo · **LB** = anterior (percorre os **3**) |
-| Missões | **X** (□) ou **Select** |
+| Missões | **X** (quadrado no PlayStation) ou **Select** |
 | Pausa | **Start** |
 | Escolher respostas e navegar nos menus | direcional ou analógico + **A** |
 
-No **modo dupla**: com **2 controles**, o primeiro é do Jogador 1 e o segundo do Jogador 2. Com **1 controle**, ele fica com o **Jogador 2** (e o Jogador 1 joga no teclado). Se os dois controles ficarem trocados (o do Jogador 1 na mão do Jogador 2), use **Trocar J1 ↔ J2** no painel **🎮 Controle**: ele também mostra qual jogador cada controle será. Dá para desligar o controle em **Opções**.
+No **modo dupla**: com **2 controles**, o primeiro é do Jogador 1 e o segundo do Jogador 2. Com **1 controle**, ele fica com o **Jogador 2** (e o Jogador 1 joga no teclado). Se os dois controles ficarem trocados (o do Jogador 1 na mão do Jogador 2), use **Trocar J1 ↔ J2** no painel **Controle**: ele também mostra qual jogador cada controle será. Dá para desligar o controle em **Opções**.
 
 <details>
-<summary><b>🛠️ O controle não funcionou? Faça este teste</b></summary>
+<summary><b>O controle não funcionou? Faça este teste</b></summary>
 
 <br>
 
-1. Na tela inicial (ou no menu de pausa), abra **🎮 Controle**. O painel mostra **ao vivo** o que o navegador enxerga: nome do controle, botões apertados, eixos do analógico e o que o jogo entendeu.
+1. Na tela inicial (ou no menu de pausa), abra **Controle**. O painel mostra **ao vivo** o que o navegador enxerga: nome do controle, botões apertados, eixos do analógico e o que o jogo entendeu.
 2. **Nenhum controle aparece?** Clique em qualquer lugar da janela do jogo e **aperte um botão do controle**. Os navegadores só mostram o controle depois disso e apenas para a janela em foco. Em controles sem fio, confira se estão ligados e pareados.
 3. **Aparece, mas os botões não batem?** Use **Configurar botões** no mesmo painel: o assistente pergunta qual botão é o A, B, Y, X e Start e qual é o sentido do analógico, e salva a configuração para aquele controle. **Restaurar padrão** desfaz.
 4. Funciona em **Chrome, Edge e Firefox** atualizados. Abra o jogo pelo arquivo `index.html` ou por `http://localhost` (controles são bloqueados em páginas não seguras).
@@ -166,9 +168,9 @@ No **modo dupla**: com **2 controles**, o primeiro é do Jogador 1 e o segundo d
 | Trocar de agente | `Tab`/`Q` ou `1` `2` `3` | clicar no retrato |
 | Escolher resposta | `1` `2` `3` ou clique | toque |
 | Missões / Pausa | `M` / `Esc` ou `P` | botões do topo |
-| **Sair de uma conversa ou atividade** | `Esc` | botão **✕ Sair** |
+| **Sair de uma conversa ou atividade** | `Esc` | botão **Sair** |
 
-## 📋 As 10 missões
+## As 10 missões
 
 | # | Missão | Local | Quem pede ajuda | O que se aprende | Tipo de desafio |
 |:-:|---|---|---|---|---|
@@ -184,15 +186,15 @@ No **modo dupla**: com **2 controles**, o primeiro é do Jogador 1 e o segundo d
 | 10 | **Portal Conecta+** | Prefeitura | Prefeita Helena | Inclusão digital é responsabilidade compartilhada | 🤝 **Cooperativa**: um posto para cada agente |
 
 > 🔒 A missão 10 (finale cooperativo) só abre depois de **7 missões concluídas**.
-> 📜 Diálogos, opções, efeitos e finais de todas as missões estão no **[roteiro completo](docs/ROTEIRO.md)**.
+> Diálogos, opções, efeitos e finais de todas as missões estão no **[roteiro completo](docs/ROTEIRO.md)**.
 
-## 📊 Status e pontos
+## Status e pontos
 
 | Status | Começa em | Efeito real no jogo |
 |---|:-:|---|
 | 📶 **Acesso** | 40 | +1 ponto extra por missão a cada 25 de Acesso. Com **≥ 50**, os postes de Wi-Fi da cidade acendem |
-| ♿ **Acessibilidade** | 30 | Melhorias do Fundo ficam mais baratas. Com **≥ 50** surge piso tátil; com **≥ 75**, rampas nas entradas |
-| 📖 **Conhecimento** | 35 | A partir de **45**, o Yuri oferece **dicas** nas escolhas |
+| **Acessibilidade** | 30 | Melhorias do Fundo ficam mais baratas. Com **≥ 50** surge piso tátil; com **≥ 75**, rampas nas entradas |
+| **Conhecimento** | 35 | A partir de **45**, o Yuri oferece **dicas** nas escolhas |
 
 🏁 **Vitória:** concluir as **10 missões** e levar os **três status a pelo menos 60**.
 ⭐ **Pontos de Comunidade** pagam melhorias no **Fundo da Cidade**; os **mutirões** gratuitos garantem que o jogo nunca fique sem saída.
@@ -206,7 +208,7 @@ No **modo dupla**: com **2 controles**, o primeiro é do Jogador 1 e o segundo d
 | 🎒 **Itens = Status** | Acesso, Acessibilidade, Conhecimento e Pontos de Comunidade |
 | 🤝 **Desafios = Cooperação** | Missões que exigem trabalho em equipe entre agentes e, em dupla, entre jogadores |
 
-## ♿ Acessibilidade do próprio jogo
+## Acessibilidade do próprio jogo
 
 - ⏱️ Sem limite de tempo; texto curto e em linguagem simples
 - ⌨️ Teclado, mouse, toque **e controle (gamepad)**; botões na tela para quem não usa teclado
@@ -216,7 +218,7 @@ No **modo dupla**: com **2 controles**, o primeiro é do Jogador 1 e o segundo d
 - 📱 No celular, segurar as setas não seleciona texto nem abre o menu do sistema
 - 🧠 Dicas opcionais, sem punição por errar
 
-## 🛠️ Tecnologias
+## Tecnologias
 
 - **HTML5 Canvas 2D** para o mundo em pixel art e **Web Audio API** para sons e música
 - **CSS3** responsivo (desktop e celular), sem frameworks
@@ -255,7 +257,7 @@ conexao-para-todos/
     └── e2e-playthrough.mjs # partida completa pela interface real
 ```
 
-## 🧪 Testes
+## Testes
 
 **Testes de lógica (sem instalar nada):** abra `tests/test.html` no navegador. São **68 verificações**: mapa alcançável, colisões, status e efeitos reais, validade das missões, equilíbrio, portal, vitória, **sair de conversas e atividades** (sem travar e sem repetir ganhos) e o **modo co-op** (movimento independente, troca de agentes, elástico, alvos por jogador).
 
@@ -275,7 +277,7 @@ O teste ponta a ponta cobre (inclusive **jogar com controle simulado**, em 1 e 2
 node tools/gerar-roteiro.js
 ```
 
-## 📜 Documentação
+## Documentação
 
 - **[Roteiro completo do jogo](docs/ROTEIRO.md)**: história, personagens, mapa, regras e o passo a passo de cada missão com diálogos, opções e consequências.
 
@@ -283,7 +285,7 @@ node tools/gerar-roteiro.js
 
 O logotipo usa **Press Start 2P** e os títulos usam **Pixelify Sans**, ambas sob a licença **SIL Open Font License 1.1** (uso livre, inclusive comercial). Os arquivos e as licenças estão em `assets/fonts/` e ficam embutidos em `fonts.css`, então o jogo funciona offline.
 
-## 👥 Créditos
+## Créditos
 
 Desenvolvido pela **Equipe 1** da **Universidade Federal do Ceará (UFC) — Campus de Russas**.
 Personagens, cidade e situações são **fictícios**.

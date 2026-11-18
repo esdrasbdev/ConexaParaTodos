@@ -240,7 +240,7 @@
       const k = UI.keys;
       const pages = [
         { title: 'Explorar a cidade', html: '<p>Ande por Conecta com ' + k(['W', 'A', 'S', 'D']) + ' ou ' + k(['←', '↑', '↓', '→']) + '. Em telas de toque, use as setas na tela.</p><p>Você controla uma equipe de <b>três agentes</b>, cada um com seu marcador: <b>Márcio ● círculo</b> (acessibilidade), <b>Miguel ■ quadrado</b> (acesso) e <b>Yuri ▲ triângulo</b> (conhecimento). Troque de agente com ' + k(['Tab']) + ' ou ' + k(['1']) + k(['2']) + k(['3']) + ' ou clicando nos retratos. Os outros seguem você.</p>' },
-        { title: 'Conversar e ajudar', html: '<p>Chegue perto de um morador, objeto ou placa e aperte ' + k(['E']) + ' ou ' + k(['Espaço']) + ' — ou use o botão <b>Interagir</b>.</p><p>Balões mostram o que fazer: <b>!</b> missão nova, <b>…</b> em andamento, <b>✔</b> concluída. Placas e cartazes dão pontos de curiosidade. Nada é cronometrado: leia com calma.</p><p><b>Quer sair?</b> Em qualquer conversa ou atividade, aperte ' + k(['Esc']) + ' ou clique em <b>✕ Sair</b>. A missão continua de onde parou e o que já foi decidido fica salvo.</p>' },
+        { title: 'Conversar e ajudar', html: '<p>Chegue perto de um morador, objeto ou placa e aperte ' + k(['E']) + ' ou ' + k(['Espaço']) + ' — ou use o botão <b>Interagir</b>.</p><p>Balões mostram o que fazer: <b>!</b> missão nova, <b>…</b> em andamento, <b>concluída</b>. Placas e cartazes dão pontos de curiosidade. Nada é cronometrado: leia com calma.</p><p><b>Quer sair?</b> Em qualquer conversa ou atividade, aperte ' + k(['Esc']) + ' ou clique em <b>Sair</b>. A missão continua de onde parou e o que já foi decidido fica salvo.</p>' },
         { title: 'Status e pontos', html: '<p>Suas escolhas mudam três status coletivos de 0 a 100: <b>Acesso</b>, <b>Acessibilidade</b> e <b>Conhecimento digital</b>. Toque em uma barra para ver o que ela faz de verdade no jogo.</p><p>Os <b>Pontos de Comunidade</b> pagam melhorias no Centro Comunitário. Escolheu mal? Tudo bem: a equipe explica, você tenta de novo. Ninguém perde o jogo.</p>' },
         { title: 'Seu objetivo', html: '<p>Conclua as <b>10 missões</b> e leve os <b>três status a pelo menos 60</b>. Se algum ficar para trás, o Centro Comunitário ajuda a recuperar.</p><p>Pause com ' + k(['Esc']) + ' ou ' + k(['P']) + '. Veja as missões com ' + k(['M']) + '. Inclusão digital é tarefa da cidade inteira — não só de cada pessoa.</p>' }
       ];
@@ -251,19 +251,19 @@
           '<tr><th scope="row">Interagir</th><td>' + k(['E']) + ' ou ' + k(['Espaço']) + '</td><td>' + k(['Enter']) + '</td></tr>' +
           '<tr><th scope="row">Trocar de agente</th><td>' + k(['Q']) + ' ou ' + k(['1']) + k(['2']) + k(['3']) + '</td><td>' + k(['Shift direito']) + ' ou ' + k(['Num 1']) + k(['Num 2']) + k(['Num 3']) + '</td></tr>' +
           '</tbody></table><p>Nos retratos da equipe: clique = Jogador 1, <b>Shift + clique</b> = Jogador 2. Se um pegar o agente do outro, eles trocam de lugar.</p>' };
-        pages[1] = { title: 'Conversar e ajudar — em dupla', html: '<p>Qualquer um pode conversar, pegar objetos e ler placas. Quem interagiu fala pelo seu agente. <b>Os dois podem escolher as respostas</b>: conversem antes de decidir!</p><p>A câmera acompanha a dupla, então vocês não podem se afastar demais um do outro. Balões mostram o que fazer: <b>!</b> missão nova, <b>…</b> em andamento, <b>✔</b> concluída.</p><p><b>Quer sair?</b> ' + k(['Esc']) + ' ou <b>✕ Sair</b> fecha a conversa; a missão continua de onde parou.</p>' };
+        pages[1] = { title: 'Conversar e ajudar — em dupla', html: '<p>Qualquer um pode conversar, pegar objetos e ler placas. Quem interagiu fala pelo seu agente. <b>Os dois podem escolher as respostas</b>: conversem antes de decidir!</p><p>A câmera acompanha a dupla, então vocês não podem se afastar demais um do outro. Balões mostram o que fazer: <b>!</b> missão nova, <b>…</b> em andamento, <b>concluída</b>.</p><p><b>Quer sair?</b> ' + k(['Esc']) + ' ou <b>Sair</b> fecha a conversa; a missão continua de onde parou.</p>' };
         pages[3] = { title: 'Seu objetivo (juntos)', html: '<p>Concluam as <b>10 missões</b> e levem os <b>três status a pelo menos 60</b>. Na missão final, <b>cada posto de teste exige um agente diferente</b>: combinem quem vai a cada posto e troquem de agente quando precisar.</p><p>Pausa: ' + k(['Esc']) + ' ou ' + k(['P']) + '. Missões: ' + k(['M']) + '. Cooperar é o jeito mais rápido de incluir todo mundo!</p>' };
       }
       pages.push({ title: 'Jogando com controle', html: '<p>Conecte um controle (Xbox, PlayStation, Switch Pro ou similar) e aperte qualquer botão: o jogo reconhece sozinho. Dá para jogar do início ao fim sem teclado.</p>' +
         '<table class="sum keys"><tbody>' +
         '<tr><th scope="row">Andar</th><td>analógico esquerdo ou direcional</td></tr>' +
-        '<tr><th scope="row">Interagir e confirmar</th><td><b>A</b> (✕ no PlayStation)</td></tr>' +
+        '<tr><th scope="row">Interagir e confirmar</th><td><b>A</b> (X no PlayStation)</td></tr>' +
         '<tr><th scope="row">Sair ou voltar</th><td><b>B</b> (○ no PlayStation)</td></tr>' +
         '<tr><th scope="row">Trocar de agente</th><td><b>Y</b> ou <b>RB</b> = próximo · <b>LB</b> = anterior (percorre os 3)</td></tr>' +
         '<tr><th scope="row">Missões</th><td><b>X</b> (□) ou <b>Select</b></td></tr>' +
         '<tr><th scope="row">Pausa</th><td><b>Start</b></td></tr>' +
         '<tr><th scope="row">Respostas e menus</th><td>direcional ou analógico para escolher, <b>A</b> para confirmar</td></tr></tbody></table>' +
-        '<p>' + (coop ? 'No modo dupla: com <b>2 controles</b>, o primeiro é do Jogador 1 e o segundo do Jogador 2. Com <b>1 controle</b>, ele fica com o <b>Jogador 2</b> e o Jogador 1 joga no teclado. Se os controles ficarem trocados, use <b>Trocar J1 ↔ J2</b> no painel 🎮 Controle.' : 'Em um jogador, o primeiro controle conectado comanda a equipe.') + '</p>' });
+        '<p>' + (coop ? 'No modo dupla: com <b>2 controles</b>, o primeiro é do Jogador 1 e o segundo do Jogador 2. Com <b>1 controle</b>, ele fica com o <b>Jogador 2</b> e o Jogador 1 joga no teclado. Se os controles ficarem trocados, use <b>Trocar J1 ↔ J2</b> no painel <b>Controle</b>.' : 'Em um jogador, o primeiro controle conectado comanda a equipe.') + '</p>' });
       return pages;
     },
 
@@ -304,7 +304,7 @@
         '<button class="btn" id="p-quests">Missões e objetivos</button>' +
         '<button class="btn" id="p-status">Status da cidade</button>' +
         '<button class="btn" id="p-how">Como jogar</button>' +
-        '<button class="btn" id="p-pad">🎮 Controle</button>' +
+        '<button class="btn icon-btn" id="p-pad"><svg class="gamepad-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 8h10a5 5 0 0 1 4.7 6.7l-.8 2.1a2.2 2.2 0 0 1-3.6.8L15.5 16h-7l-1.8 1.6a2.2 2.2 0 0 1-3.6-.8l-.8-2.1A5 5 0 0 1 7 8Z"/><path d="M7.5 11v4M5.5 13h4M15.5 12.5h.01M18 14.5h.01"/></svg><span>Controle</span></button>' +
         '<button class="btn" id="p-opts">Opções</button>' +
         '<button class="btn" id="p-restart">Reiniciar partida</button>' +
         '<button class="btn" id="p-menu">Voltar ao menu</button></div>',

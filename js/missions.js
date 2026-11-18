@@ -348,13 +348,19 @@
    * então sair (Esc) durante o retorno nunca permite repetir o ganho. */
   async function choiceLoop(m, c, reason, onCommit) {
     const s = ms(m), tried = [];
+    const display = c.options.map(function (o, index) { return { o: o, index: index }; });
+    for (let i = display.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const tmp = display[i]; display[i] = display[j]; display[j] = tmp;
+    }
     for (;;) {
-      const i = await D().ask(c.who, c.prompt, c.options.map(function (o) { return o.text; }), { hint: c.hint, tried: tried });
-      const o = c.options[i];
+      const displayTried = display.map(function (item, i) { return tried.indexOf(item.index) >= 0 ? i : -1; }).filter(function (i) { return i >= 0; });
+      const i = await D().ask(c.who, c.prompt, display.map(function (item) { return item.o.text; }), { hint: c.hint, tried: displayTried });
+      const o = display[i].o;
       const deltas = G().applyFx(o.fx, reason || m.title); acc(s, deltas);
       if (o.tier !== 'bad') { s.score.push(o.tier === 'best' ? 2 : 1); if (onCommit) onCommit(); }
       await D().feedback({ who: c.who, tier: o.tier, text: o.why, fx: deltas });
-      if (o.tier === 'bad') { tried.push(i); continue; }
+      if (o.tier === 'bad') { tried.push(display[i].index); continue; }
       return o.tier;
     }
   }

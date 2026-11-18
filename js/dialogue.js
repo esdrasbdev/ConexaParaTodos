@@ -115,7 +115,7 @@
     }
   });
 
-  /* Esc sai da conversa (quando não há outra janela aberta por cima) e o botão ✕ Sair faz o mesmo */
+  /* Esc sai da conversa (quando não há outra janela aberta por cima) e o botão Sair faz o mesmo */
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && open && !CPT.Modal.top()) { e.preventDefault(); e.stopImmediatePropagation(); D.cancel(); }
   });

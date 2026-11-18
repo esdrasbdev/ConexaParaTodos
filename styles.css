@@ -47,6 +47,9 @@ kbd {
 .btn.big { font-size: 1.3rem; padding: .6em 1.4em; }
 .btn:disabled { opacity: .55; cursor: not-allowed; box-shadow: none; }
 .reduce-motion .btn { transition: none; }
+.icon-btn { display: inline-flex; align-items: center; justify-content: center; gap: 7px; }
+.gamepad-icon { width: 1.25em; height: 1.25em; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: square; stroke-linejoin: miter; }
+.gamepad-icon.inline { vertical-align: -.18em; margin-right: 6px; }
 
 /* ---------- tela de título ---------- */
 #title-canvas { position: absolute; inset: 0; width: 100%; height: 100%; image-rendering: pixelated; }

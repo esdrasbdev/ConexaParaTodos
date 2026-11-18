@@ -15,7 +15,7 @@
       if (W.NPCS[who]) return CPT.Sprites.portraitURL(W.NPCS[who].look);
       return CPT.Sprites.portraitURL(P.actor().def.look);
     })();
-    return '<div class="act-head"><img class="pix portrait" alt="" src="' + url + '"><div><p class="kicker">Atividade</p><h2>' + esc(title) + '</h2></div><button class="btn small ghost act-exit" aria-label="Sair da atividade (tecla Esc)">✕ Sair <kbd>Esc</kbd></button></div>';
+    return '<div class="act-head"><img class="pix portrait" alt="" src="' + url + '"><div><p class="kicker">Atividade</p><h2>' + esc(title) + '</h2></div><button class="btn small ghost act-exit" aria-label="Sair da atividade (tecla Esc)">Sair <kbd>Esc</kbd></button></div>';
   }
   function hintBlock(hint) {
     if (!hint) return '';

@@ -17,7 +17,7 @@ const N = { ac: 'Acesso', ab: 'Acessibilidade', co: 'Conhecimento' };
 const fx = function (o) { const t = Object.keys(o || {}).map(function (k) { return N[k] + ' ' + (o[k] > 0 ? '+' : '') + o[k]; }).join(', '); return t || '—'; };
 const esc = function (s) { return String(s).replace(/\|/g, '\\|').replace(/\n/g, ' '); };
 const strip = function (h) { return h.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim(); };
-const TIER = { best: '✅ Ótima escolha', ok: '🟡 Funciona, mas dá para melhorar', bad: '❌ Ainda não é o melhor caminho (tenta de novo)' };
+const TIER = { best: 'Ótima escolha', ok: 'Funciona, mas dá para melhorar', bad: 'Ainda não é o melhor caminho (tenta de novo)' };
 const who = function (id) {
   if (id === 'me') return 'Agente em ação (Márcio, Miguel ou Yuri)';
   if (id === 'narrator') return 'Conecta (narração)';
@@ -64,7 +64,7 @@ function bestTotals(m) {
 }
 
 /* ---------- cabeçalho ---------- */
-p('# 📜 Roteiro do jogo — Conexão para Todos');
+p('# Roteiro do jogo — Conexão para Todos');
 p();
 p('> Documento de referência com **tudo o que existe no jogo**: história, personagens, mapa, regras, status e o passo a passo completo de cada missão (diálogos, escolhas, atividades e consequências).');
 p('> As seções de missões são geradas automaticamente a partir dos dados do jogo (`node tools/gerar-roteiro.js`), então refletem fielmente o que está implementado.');
@@ -214,11 +214,11 @@ p('Cada decisão tem **três níveis**, sempre explicados no jogo:');
 p();
 p('| Nível | O que acontece |');
 p('|---|---|');
-p('| ✅ **Ótima escolha** | Maior ganho nos status; a missão segue |');
-p('| 🟡 **Funciona, mas dá para melhorar** | Ganho menor, com explicação do que faltou; a missão segue |');
-p('| ❌ **Ainda não é o melhor caminho** | Pequena perda; o jogo explica a consequência e o jogador **tenta outra opção** (a opção já tentada fica marcada) |');
+p('| **Ótima escolha** | Maior ganho nos status; a missão segue |');
+p('| **Funciona, mas dá para melhorar** | Ganho menor, com explicação do que faltou; a missão segue |');
+p('| **Ainda não é o melhor caminho** | Pequena perda; o jogo explica a consequência e o jogador **tenta outra opção** (a opção já tentada fica marcada) |');
 p();
-p('**Sair no meio:** em qualquer conversa ou atividade o jogador pode apertar `Esc` (ou clicar em **✕ Sair**). A missão continua de onde parou: as etapas já decididas ficam salvas e **não dá para repetir um ganho de status**; a etapa em andamento recomeça na próxima visita. Se o jogador sair depois de concluir o último posto da missão cooperativa, o bônus de equipe é concedido mesmo assim (uma única vez).');
+p('**Sair no meio:** em qualquer conversa ou atividade o jogador pode apertar `Esc` (ou clicar em **Sair**). A missão continua de onde parou: as etapas já decididas ficam salvas e **não dá para repetir um ganho de status**; a etapa em andamento recomeça na próxima visita. Se o jogador sair depois de concluir o último posto da missão cooperativa, o bônus de equipe é concedido mesmo assim (uma única vez).');
 p();
 p('Além das escolhas, há atividades: **ordenar passos**, **achar barreiras/golpes** (com opção de tentar de novo), **planejar com orçamento**, **coletar itens** pelo mapa e **configurar postos de trabalho**.');
 p();
@@ -239,16 +239,16 @@ p();
 p('| Ação | Botão |');
 p('|---|---|');
 p('| Andar | analógico esquerdo ou direcional |');
-p('| Interagir / confirmar | **A** (✕ no PlayStation) |');
+p('| Interagir / confirmar | **A** (X no PlayStation) |');
 p('| Sair ou voltar | **B** (○) |');
 p('| Trocar de agente | **Y** ou **RB** = próximo · **LB** = anterior (percorre os 3) |');
 p('| Missões | **X** (□) ou **Select** |');
 p('| Pausa | **Start** |');
 p('| Respostas e menus | direcional ou analógico + **A** |');
 p();
-p('**Se o controle não funcionar:** na tela inicial (ou na pausa) o botão **🎮 Controle** abre um painel que mostra, ao vivo, o que o navegador detecta (nome do controle, botões, eixos) e um assistente para configurar os botões de controles com mapeamento diferente. Dispositivos "fantasmas" (como o sensor de movimento do controle de PlayStation) são ignorados.');
+p('**Se o controle não funcionar:** na tela inicial (ou na pausa) o botão **Controle** abre um painel que mostra, ao vivo, o que o navegador detecta (nome do controle, botões, eixos) e um assistente para configurar os botões de controles com mapeamento diferente. Dispositivos "fantasmas" (como o sensor de movimento do controle de PlayStation) são ignorados.');
 p();
-p('Em dupla: com **2 controles**, o 1º é do Jogador 1 e o 2º do Jogador 2; com **1 controle**, ele fica com o **Jogador 2**. Se os controles ficarem trocados, o botão **Trocar J1 ↔ J2** do painel 🎮 Controle inverte. A dica de interação mostra **A** quando o jogador está usando o controle. É possível desligar o controle em **Opções**.');
+p('Em dupla: com **2 controles**, o 1º é do Jogador 1 e o 2º do Jogador 2; com **1 controle**, ele fica com o **Jogador 2**. Se os controles ficarem trocados, o botão **Trocar J1 ↔ J2** do painel **Controle** inverte. A dica de interação mostra **A** quando o jogador está usando o controle. É possível desligar o controle em **Opções**.');
 p();
 p('- Cada jogador controla **um agente** ao mesmo tempo; o terceiro agente acompanha o Jogador 1.');
 p('- Qualquer um pode conversar, pegar itens e ler placas; **quem interagiu fala pelo seu agente**, e os dois podem escolher as respostas.');
@@ -262,7 +262,7 @@ p('## 10. Roteiro das ' + M.list.length + ' missões');
 p();
 p('Ordem **livre**, exceto a missão ' + M.list.length + ' (**Portal Conecta+**), que só abre depois de **' + C.PORTAL + ' missões concluídas**. Ordem sugerida: Praça → Posto de Saúde → Prefeitura (Beto) → Escola → Centro Comunitário → Padaria → Biblioteca → Casa do Seu Zeca → Casa da Sofia → Prefeitura (Helena).');
 p();
-p('**Legenda dos passos:** 💬 conversa · 🔀 escolha · 🔢 ordenar · 🔎 achar problemas · 🔗 relacionar · 🧩 planejar · 🧭 coletar · 🖥️ postos de trabalho');
+p('**Legenda dos passos:** conversa · escolha · ordenar · achar problemas · relacionar · planejar · coletar · postos de trabalho');
 p();
 
 M.list.forEach(function (m, idx) {
@@ -284,17 +284,17 @@ M.list.forEach(function (m, idx) {
     p('#### Passo ' + (i + 1));
     p();
     if (s.t === 'talk') {
-      p('💬 **Conversa**');
+      p('**Conversa**');
       p();
       s.lines.forEach(function (l) { p('- **' + who(l[0]) + ':** ' + l[1]); });
       p();
     } else if (s.t === 'choice') {
-      p('🔀 **Escolha** — **' + who(s.who) + ':** “' + s.prompt + '”');
+      p('**Escolha** — **' + who(s.who) + ':** “' + s.prompt + '”');
       p();
       if (s.hint) { p('*Dica do Yuri (com Conhecimento ≥ ' + C.HINT + '):* ' + s.hint); p(); }
       choiceTable(s);
     } else if (s.t === 'order') {
-      p('🔢 **Ordenar passos — “' + s.title + '”** — ' + s.prompt);
+      p('**Ordenar passos — “' + s.title + '”** — ' + s.prompt);
       p();
       s.items.forEach(function (t, k) { p((k + 1) + '. ' + t); });
       p();
@@ -303,17 +303,17 @@ M.list.forEach(function (m, idx) {
       p('**Ao concluir:** ' + fx(s.fx) + '. *“' + s.done + '”*');
       p();
     } else if (s.t === 'spot') {
-      p('🔎 **Achar problemas — “' + s.title + '”** (' + (s.kind === 'phone' ? 'tela de celular' : 'tela de site') + ') — ' + s.prompt);
+      p('**Achar problemas — “' + s.title + '”** (' + (s.kind === 'phone' ? 'tela de celular' : 'tela de site') + ') — ' + s.prompt);
       p();
       p('| Trecho da tela | É problema? | Explicação |'); p('|---|---|---|');
-      s.elements.forEach(function (e) { p('| ' + esc(strip(e.html)) + ' | ' + (e.flaw ? '🚩 Sim' : '✅ Não') + ' | ' + esc(e.why) + ' |'); });
+      s.elements.forEach(function (e) { p('| ' + esc(strip(e.html)) + ' | ' + (e.flaw ? 'Sim' : 'Não') + ' | ' + esc(e.why) + ' |'); });
       p();
       const nf = s.elements.filter(function (e) { return e.flaw; }).length;
       p('Há **' + nf + ' problemas**. O jogador marca, clica em **Verificar**, vê o resultado e pode **tentar de novo** ou seguir. Ganho proporcional ao que achou (máximo **' + fx(s.fx) + '**). *“' + s.after + '”*');
       p();
       if (s.hint) { p('*Dica:* ' + s.hint); p(); }
     } else if (s.t === 'match') {
-      p('🔗 **Relacionar — “' + s.title + '”** — ' + s.prompt);
+      p('**Relacionar — “' + s.title + '”** — ' + s.prompt);
       p();
       p('| Pessoa | Recurso que ajuda |'); p('|---|---|');
       s.pairs.forEach(function (pr) { p('| ' + esc(pr[0]) + ' | ' + esc(pr[1]) + ' |'); });
@@ -322,7 +322,7 @@ M.list.forEach(function (m, idx) {
       p();
       if (s.hint) { p('*Dica:* ' + s.hint); p(); }
     } else if (s.t === 'plan') {
-      p('🧩 **Planejar — “' + s.title + '”** — ' + s.prompt);
+      p('**Planejar — “' + s.title + '”** — ' + s.prompt);
       p();
       p('Planejamento disponível: **' + s.budget + '** · mínimo de **' + s.min + '** ações.');
       p();
@@ -335,7 +335,7 @@ M.list.forEach(function (m, idx) {
       p();
       if (s.hint) { p('*Dica:* ' + s.hint); p(); }
     } else if (s.t === 'collect') {
-      p('🧭 **Explorar e coletar** — objetivo: *' + s.objective + '*');
+      p('**Explorar e coletar** — objetivo: *' + s.objective + '*');
       p();
       s.intro.forEach(function (l) { p('- **' + who(l[0]) + ':** ' + l[1]); });
       p();
@@ -345,7 +345,7 @@ M.list.forEach(function (m, idx) {
       p('Os itens **brilham** no mapa só enquanto a missão está nessa etapa. Depois de pegar todos, o jogador **volta a falar com ' + n.name + '**. Se voltar antes, ' + n.name + ' lembra: *“' + s.remind + '”*');
       p();
     } else if (s.t === 'stations') {
-      p('🖥️ **Postos de trabalho** — objetivo: *' + s.objective + '*' + (s.coop ? ' · **cooperativo**' : ''));
+      p('**Postos de trabalho** — objetivo: *' + s.objective + '*' + (s.coop ? ' · **cooperativo**' : ''));
       p();
       p('*Lembrete de ' + n.name + ':* “' + s.remind + '”');
       p();
@@ -365,7 +365,7 @@ M.list.forEach(function (m, idx) {
   p();
   m.outro.forEach(function (l) { p('- **' + who(l[0]) + ':** ' + l[1]); });
   p();
-  p('➡️ Resumo da missão: **+3 Pontos de Comunidade** (+ bônus de Acesso), estrelas de 1 a 3 e o quadro “Você sabia?”:');
+  p('**Resumo da missão:** **+3 Pontos de Comunidade** (+ bônus de Acesso), estrelas de 1 a 3 e o quadro “Você sabia?”:');
   p();
   p('> ' + m.learn);
   p();
